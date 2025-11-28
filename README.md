@@ -83,7 +83,7 @@ The model expects 8 features in this order:
 
 ## 🌐 Deployment
 
-This app is deployed on [Render.com](https://render.com)
+This app is deployed on "https://ai-house-price-predictor.onrender.com"
 
 **Start Command:**
 ```bash
