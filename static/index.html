@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="AI-powered house price prediction using machine learning. Get instant property value estimates based on California housing data.">
+    <meta name="keywords" content="house price prediction, AI, machine learning, real estate, property valuation">
+    <title>🏠 AI House Price Predictor | Real Estate ML Analytics</title>
+
+    <!-- Favicon -->
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🏠</text></svg>">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <!-- Animated Background -->
+    <div class="bg-animation"></div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo">🏠</div>
+            <h1>AI House Price Predictor</h1>
+            <p class="subtitle">Powered by Machine Learning • Trained on California Housing Dataset</p>
+        </header>
+
+        <!-- Main Content Grid -->
+        <div class="main-content">
+            <!-- Input Form Card -->
+            <div class="glass-card">
+                <h2 class="card-title">
+                    <span class="card-icon">📊</span>
+                    Property Details
+                </h2>
+
+                <form id="predictionForm">
+                    <!-- Median Income -->
+                    <div class="form-group">
+                        <label for="medInc" class="form-label">Median Income (Block Group)</label>
+                        <input type="number" id="medInc" class="form-input" step="0.0001" placeholder="e.g., 8.3252"
+                            required>
+                    </div>
+
+                    <!-- Two Column Grid -->
+                    <div class="form-grid">
+                        <!-- House Age -->
+                        <div class="form-group">
+                            <label for="houseAge" class="form-label">House Age</label>
+                            <input type="number" id="houseAge" class="form-input" placeholder="e.g., 41" required>
+                        </div>
+
+                        <!-- Average Rooms -->
+                        <div class="form-group">
+                            <label for="aveRooms" class="form-label">Avg Rooms</label>
+                            <input type="number" id="aveRooms" class="form-input" step="0.01" placeholder="e.g., 6.98"
+                                required>
+                        </div>
+
+                        <!-- Average Bedrooms -->
+                        <div class="form-group">
+                            <label for="aveBedrms" class="form-label">Avg Bedrooms</label>
+                            <input type="number" id="aveBedrms" class="form-input" step="0.01" placeholder="e.g., 1.02"
+                                required>
+                        </div>
+
+                        <!-- Population -->
+                        <div class="form-group">
+                            <label for="population" class="form-label">Population</label>
+                            <input type="number" id="population" class="form-input" placeholder="e.g., 322" required>
+                        </div>
+
+                        <!-- Average Occupancy -->
+                        <div class="form-group">
+                            <label for="aveOccup" class="form-label">Avg Occupancy</label>
+                            <input type="number" id="aveOccup" class="form-input" step="0.01" placeholder="e.g., 2.55"
+                                required>
+                        </div>
+
+                        <!-- Latitude -->
+                        <div class="form-group">
+                            <label for="latitude" class="form-label">Latitude</label>
+                            <input type="number" id="latitude" class="form-input" step="0.01" placeholder="e.g., 37.88"
+                                required>
+                        </div>
+
+                        <!-- Longitude -->
+                        <div class="form-group">
+                            <label for="longitude" class="form-label">Longitude</label>
+                            <input type="number" id="longitude" class="form-input" step="0.01"
+                                placeholder="e.g., -122.23" required>
+                        </div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn" id="predictBtn">
+                        🔮 Predict Price
+                    </button>
+                </form>
+
+                <!-- Info Box -->
+                <div class="info-box">
+                    <h3>💡 About the Features</h3>
+                    <ul>
+                        <li>Median Income: in tens of thousands of dollars</li>
+                        <li>House Age: median age of houses in the block</li>
+                        <li>Avg Rooms: average number of rooms per household</li>
+                        <li>Population: block group population</li>
+                        <li>Location: latitude and longitude coordinates</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Result Card -->
+            <div class="glass-card">
+                <h2 class="card-title">
+                    <span class="card-icon">💰</span>
+                    Prediction Result
+                </h2>
+
+                <!-- Result Display -->
+                <div id="resultSection" style="display: none;">
+                    <div class="result-card">
+                        <div class="result-label">Estimated Property Value</div>
+                        <div class="result-value" id="predictionValue">₹0</div>
+                        <div class="result-description">
+                            Based on California Housing Dataset • Converted to Indian Rupees (INR)
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Placeholder when no prediction -->
+                <div id="placeholderSection">
+                    <div style="text-align: center; padding: 3rem 1rem; opacity: 0.5;">
+                        <div style="font-size: 4rem; margin-bottom: 1rem;">📈</div>
+                        <p style="font-size: 1.125rem; color: var(--dark-600);">
+                            Enter property details and click "Predict Price" to see the estimated value
+                        </p>
+                    </div>
+                </div>
+
+                <!-- API Info -->
+                <div class="info-box" style="margin-top: 2rem;">
+                    <h3>🚀 How It Works</h3>
+                    <ul>
+                        <li>Machine Learning model trained on 20,000+ properties</li>
+                        <li>Uses Linear Regression algorithm</li>
+                        <li>Real-time predictions via FastAPI backend</li>
+                        <li>Based on California Housing Dataset</li>
+                    </ul>
+                </div>
+
+                <!-- Quick Actions -->
+                <div style="margin-top: 1.5rem;">
+                    <button onclick="location.href='/docs'" class="btn"
+                        style="background: rgba(99, 102, 241, 0.2); box-shadow: none; margin-bottom: 0.75rem;">
+                        📚 View API Documentation
+                    </button>
+                    <button onclick="generateRandomExample()" class="btn"
+                        style="background: rgba(139, 92, 246, 0.2); box-shadow: none;">
+                        🎲 Try Random Example
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feature Cards -->
+        <div class="features">
+            <div class="feature-card" style="animation-delay: 0.1s;">
+                <div class="feature-icon">⚡</div>
+                <h3 class="feature-title">Lightning Fast</h3>
+                <p class="feature-description">Get instant predictions powered by optimized ML algorithms</p>
+            </div>
+            <div class="feature-card" style="animation-delay: 0.2s;">
+                <div class="feature-icon">🎯</div>
+                <h3 class="feature-title">Accurate</h3>
+                <p class="feature-description">Trained on real California housing market data</p>
+            </div>
+            <div class="feature-card" style="animation-delay: 0.3s;">
+                <div class="feature-icon">🔒</div>
+                <h3 class="feature-title">Secure</h3>
+                <p class="feature-description">Your data is processed securely and never stored</p>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer style="text-align: center; margin-top: 4rem; padding: 2rem 0; opacity: 0.5;">
+            <p style="font-size: 0.875rem; color: var(--dark-600);">
+                Built with FastAPI + Machine Learning • Deployed on Render
+            </p>
+        </footer>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="/static/js/app.js"></script>
+
+    <!-- Toggle placeholder/result visibility -->
+    <script>
+        const resultSection = document.getElementById('resultSection');
+        const placeholderSection = document.getElementById('placeholderSection');
+
+        // Observer to toggle sections
+        const observer = new MutationObserver(() => {
+            if (resultSection.style.display === 'block') {
+                placeholderSection.style.display = 'none';
+            } else {
+                placeholderSection.style.display = 'block';
+            }
+        });
+
+        observer.observe(resultSection, { attributes: true, attributeFilter: ['style'] });
+    </script>
+</body>
+
+</html>
